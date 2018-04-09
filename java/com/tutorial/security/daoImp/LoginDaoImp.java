@@ -71,12 +71,15 @@ public class LoginDaoImp implements LoginDao {
 		Query query = session.createQuery("From Login l where l.email=:email");
 		query.setParameter("email", login);
 		
+		if(query.getResultList().size()>0){
+			
 		Login logi = (Login) query.getSingleResult(); 
 		
 		session.delete(logi);
 		
 		session.getTransaction().commit();
 		session.close();
+		}
 	}
 
 }

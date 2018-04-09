@@ -54,7 +54,7 @@ public class TemplateController {
 			System.out.println("template");
 			return "template";
 		}else {
-			System.out.println("contactPage");
+			System.out.println("redirect:/dog/DogPage");
 			return "redirect:/dog/DogPage";
 		}
 		

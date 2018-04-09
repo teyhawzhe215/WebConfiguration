@@ -95,10 +95,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.csrf().disable().authorizeRequests().antMatchers("/","/**","/forget/**").permitAll()
 		.antMatchers("/dog/**").hasRole("USER").and().formLogin().loginPage("/loginPage")
 		.loginProcessingUrl("/loginAction").usernameParameter("email")
-		.passwordParameter("password").and()
+		.passwordParameter("password").defaultSuccessUrl("/dog/DogPage").failureUrl("/failloginPage").and()
 		.rememberMe().rememberMeParameter("remember-me").tokenRepository(tokenRepository)  
-		.tokenValiditySeconds(86400).and().exceptionHandling().accessDeniedPage("/Access_Denied")
-		.and().logout().logoutUrl("/logoutAction").logoutSuccessUrl("/");
+		.tokenValiditySeconds(86400).and().exceptionHandling().accessDeniedPage("/Access_Denied").and().logout().logoutUrl("/logoutAction").logoutSuccessUrl("/homePage");
 		
 		
 		

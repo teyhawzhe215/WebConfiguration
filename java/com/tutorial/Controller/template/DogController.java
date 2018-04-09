@@ -23,7 +23,12 @@ public class DogController {
 	}
 	
 	
-	
+	@RequestMapping(value="/logoutAction")
+	public String logout(HttpSession session) {
+		
+		System.out.println("session " + session.getAttribute("roles"));
+		return "/";
+	}
 	
 	
 }

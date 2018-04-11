@@ -18,6 +18,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.validation.Validator;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.filter.CharacterEncodingFilter;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
@@ -31,7 +32,7 @@ import com.tutorial.converter.RoleToUserProfileConverter;
 
 @Configurable
 @EnableWebMvc
-@ComponentScan(basePackages= {"com.tutorial.*","com.user.*","com.tutorial.animalgroup.*","com.security.*"})
+@ComponentScan(basePackages= {"com.tutorial.*","com.user.*","com.tutorial.animalgroup.*","com.security.*","com.user.*"})
 @EnableWebSecurity
 public class WebMvcConfig implements WebMvcConfigurer {
 	
@@ -61,6 +62,14 @@ public class WebMvcConfig implements WebMvcConfigurer {
 		 registry.viewResolver(tiles);
 	}
 
+	@Bean
+	public CommonsMultipartResolver multipart() {
+		CommonsMultipartResolver multipartResolver =  new CommonsMultipartResolver();
+		multipartResolver.setMaxInMemorySize(100000);
+		return multipartResolver;
+	}
+	
+	
 	//畫面產生器
 	/*@Bean
 	public InternalResourceViewResolver viewResolver() {
@@ -110,7 +119,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		// TODO Auto-generated method stub
-	
+		
+		registry.addResourceHandler("/tmpFiles/**").addResourceLocations("file:///${fullPath}/tmpFiles/");
 		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
 	}
 	

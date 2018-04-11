@@ -47,6 +47,10 @@
                                         </div>
                                         
                                         <div class="col-md-1">
+                                           <a href="${pageContext.request.contextPath}/dog/upLoadDogPage" role="button" class="btn btn-outline-warning btn-lg">上傳</a>
+                                        </div>
+                                        
+                                        <div class="col-md-1">
                                             <a href="${pageContext.request.contextPath}/contactPage" role="button" class="btn btn-outline-warning btn-lg">聯絡我們</a>
                                         </div>
                                     </div>

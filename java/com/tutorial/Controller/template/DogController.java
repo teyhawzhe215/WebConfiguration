@@ -4,6 +4,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
@@ -16,53 +18,36 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.user.service.DogProfileService;
+
 @Controller
 @SessionAttributes("roles")
 @RequestMapping("/dog")
 public class DogController {
 
+	@Autowired
+	@Qualifier("dogProfileService")
+	DogProfileService dogProfileService;
 	
 	
 	@RequestMapping(value="/DogPage")
-	public String getDogPage(HttpSession session) {
+	public String getDogPage(HttpSession session ,  Model model) {
 		
 		System.out.println("session " + session.getAttribute("roles"));
+		
+		String rootPath = System.getProperty("catalina.home");
+		System.out.println("rootPath  " + rootPath);
+		
+		
+		model.addAttribute("list", dogProfileService.getDogProfile());
 		
 		
 		return "logout/dog";
 	}
 	
-	@RequestMapping(value="/failloginPage" , method = RequestMethod.GET )
-	public String fail(@RequestParam String email  , @RequestParam String user ,Model model , BindingResult rs) {
-		
-		System.out.println("email  " + email);
-		
-		model.addAttribute("EMAIL", email);
-		
-		
-		
-		return "template";
-		
-	}
 	
-	/*@RequestMapping(value="/logoutAction")
-	public String logout(HttpServletRequest request , HttpServletResponse response ) {
-		
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		System.out.println("auth  "+auth);
-		if(auth!=null) {
-			System.out.println("come here");
-			new SecurityContextLogoutHandler().logout(request, response, auth);
-			
-			HttpSession session= request.getSession(false);
-	        SecurityContextHolder.clearContext();
-	        if(session != null) {
-	            session.invalidate();
-	        }
-			
-		}
-		return "redirect:/homePage";
-	}*/
+	
+	
 	
 	
 }

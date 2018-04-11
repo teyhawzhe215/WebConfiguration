@@ -39,15 +39,15 @@
                                         
                                        
                                         <div class="col-md-1">
-                                            <a href="/main/logoutAction" role="button" class="btn btn-outline-warning btn-lg">登出</a>
+                                            <a href="${pageContext.request.contextPath}/logoutAction" role="button" class="btn btn-outline-warning btn-lg">登出</a>
                                         </div>
                                         
                                         <div class="col-md-1">
-                                           <a href="/main/dog/DogPage" role="button" class="btn btn-outline-warning btn-lg">小狗</a>
+                                           <a href="${pageContext.request.contextPath}/dog/DogPage" role="button" class="btn btn-outline-warning btn-lg">小狗</a>
                                         </div>
                                         
                                         <div class="col-md-1">
-                                            <a href="/main/contactPage" role="button" class="btn btn-outline-warning btn-lg">聯絡我們</a>
+                                            <a href="${pageContext.request.contextPath}/contactPage" role="button" class="btn btn-outline-warning btn-lg">聯絡我們</a>
                                         </div>
                                     </div>
                                 </div>

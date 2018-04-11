@@ -18,7 +18,15 @@
                 </head>
 
                 <body>
-
+						<div class="container">
+							<div class="row">
+								<div class="col-md-12 text-center">
+								
+								<strong>電話:(02)123456789</strong>
+								
+								</div>
+							</div>
+						</div>
 
 
                 </body>

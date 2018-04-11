@@ -17,6 +17,8 @@ public class HibernateTokenRepositoryImpl implements PersistentTokenRepository {
 	@Autowired
 	private LoginDao loginDao;
 	
+	private String seriesTemp="";
+	
 	@Override
 	public void createNewToken(PersistentRememberMeToken token) {
 		// TODO Auto-generated method stub
@@ -28,6 +30,10 @@ public class HibernateTokenRepositoryImpl implements PersistentTokenRepository {
 		login.setLast_used(token.getDate().toString());
 		login.setSeries(token.getSeries());
 		login.setToken(token.getTokenValue());
+		
+		seriesTemp=token.getSeries();
+		System.out.println("seriesTemp "+seriesTemp);
+		
 		loginDao.save(login);
 	}
 
@@ -53,6 +59,8 @@ public class HibernateTokenRepositoryImpl implements PersistentTokenRepository {
 		
 		if( login != null) {
 			System.out.println("getTokenForSeries is not null");
+			seriesTemp=login.getSeries();
+			System.out.println("seriesTemp "+seriesTemp);
 			return new PersistentRememberMeToken(login.getEmail(),login.getSeries(),login.getToken(),new Date(login.getLast_used()));
 		}
 		System.out.println("getTokenForSeries is null");
@@ -65,8 +73,9 @@ public class HibernateTokenRepositoryImpl implements PersistentTokenRepository {
 		// TODO Auto-generated method stub
 
 		System.out.println("removeUserTokens " +username);
-		loginDao.delete(username);
-		
+		System.out.println("seriesTemp "+seriesTemp);
+		loginDao.delete(seriesTemp);
+		seriesTemp=null;
 	}
 
 }

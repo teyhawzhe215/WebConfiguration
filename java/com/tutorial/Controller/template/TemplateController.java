@@ -1,18 +1,21 @@
 package com.tutorial.Controller.template;
 
+import java.security.Principal;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.authentication.AuthenticationTrustResolver;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.tutorial.security.entities.UserRole;
@@ -27,10 +30,6 @@ public class TemplateController {
 	@Qualifier("UserService")
 	public UserService userService;
 	
-	
-	@Autowired
-	PersistentTokenBasedRememberMeServices persistentTokenBasedRememberMeServices;
-	
 	@Autowired
     AuthenticationTrustResolver authenticationTrustResolver;
 	
@@ -44,12 +43,6 @@ public class TemplateController {
 	@RequestMapping(value= {"/","/homePage"} , method = {RequestMethod.GET ,  RequestMethod.POST})
 	public String getTemplate() {
 		
-		
-	
-		//System.out.println("trueOrfalse:"+isCurrentAuthenticationAnonymous());
-		
-		
-		 
 		if(isCurrentAuthenticationAnonymous()) {
 			System.out.println("template");
 			return "template";
@@ -57,23 +50,6 @@ public class TemplateController {
 			System.out.println("redirect:/dog/DogPage");
 			return "redirect:/dog/DogPage";
 		}
-		
-		
-		/*System.out.println("User");
-		List<User> user=userService.getAllUser();
-		
-		for(User index : user) {
-			System.out.println(index.toString());
-		}
-		
-		System.out.println("Animal");
-		
-		List<com.tutorial.animalgroup.entities.User> animal=service.getUser();
-		
-		for(com.tutorial.animalgroup.entities.User index : animal) {
-			System.out.println(index.toString());
-		}*/
-		
 		
 	}
 	
@@ -87,7 +63,7 @@ public class TemplateController {
 	@RequestMapping(value="/contactPage", method = RequestMethod.GET)
 	public String getContact() {
 		System.out.println("contact");
-		
+
 		if(isCurrentAuthenticationAnonymous()) {
 			return "login/contact";
 		}
@@ -96,12 +72,9 @@ public class TemplateController {
 	}
 	
 	@RequestMapping(value= "/loginPage" , method = RequestMethod.GET)
-	public String getLogin() {
-		System.out.println("login....");
+	public String getLogin(@RequestParam(required = false) String error,@RequestParam(required = false) String email) {
 		return "login/login";
 	}
-	
-	
 	
 	
 	@ModelAttribute("roles")

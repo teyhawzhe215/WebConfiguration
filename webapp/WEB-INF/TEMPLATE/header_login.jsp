@@ -38,15 +38,15 @@
                                         </div>
                                         
                                         <div class="col-md-1">
-                                            <a href="/main" role="button" class="btn btn-outline-warning btn-lg"> <img
+                                            <a href="${pageContext.request.contextPath}" role="button" class="btn btn-outline-warning btn-lg"> <img
 												src="<c:url value="/resources/images/dogHand.jpg" />" alt="首頁" class="img-fluid" style="max-height:30px;max-width:40px"  />
 											</a>
                                         </div>
                                         <div class="col-md-1">
-                                            <a href="/main/registerPage" role="button" class="btn btn-outline-warning btn-lg">註冊</a>
+                                            <a href="${pageContext.request.contextPath}/registerPage" role="button" class="btn btn-outline-warning btn-lg">註冊</a>
                                         </div>
                                         <div class="col-md-1">
-                                            <a href="/main/contactPage" role="button" class="btn btn-outline-warning btn-lg">聯絡我們</a>
+                                            <a href="${pageContext.request.contextPath}/contactPage" role="button" class="btn btn-outline-warning btn-lg">聯絡我們</a>
                                         </div>
                                     </div>
                                 </div>

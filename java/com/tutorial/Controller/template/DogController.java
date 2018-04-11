@@ -8,6 +8,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -30,12 +32,16 @@ public class DogController {
 		return "logout/dog";
 	}
 	
-	@RequestMapping(value="failloginPage" , method = RequestMethod.POST )
-	public String fail(@RequestParam String email , @RequestParam String user) {
+	@RequestMapping(value="/failloginPage" , method = RequestMethod.GET )
+	public String fail(@RequestParam String email  , @RequestParam String user ,Model model , BindingResult rs) {
+		
+		System.out.println("email  " + email);
+		
+		model.addAttribute("EMAIL", email);
 		
 		
 		
-		return "";
+		return "template";
 		
 	}
 	

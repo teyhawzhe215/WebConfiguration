@@ -151,8 +151,7 @@
 
    
 
-
-                      <form:form action="/main/registerAction" method="get" modelAttribute="user">
+                      <form:form action="${pageContext.request.contextPath}/registerAction" method="get" modelAttribute="user">
                         <div class="container form-group">
                             <div class="row">
                                 <div class="col-md-5">    

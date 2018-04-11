@@ -22,7 +22,9 @@ public class LoginDaoImp implements LoginDao {
 	public void save(Login login) {
 		// TODO Auto-generated method stub
 		Session session = sessionFactory.getCurrentSession();
-		session.beginTransaction();
+		if(!session.beginTransaction().isActive()) {
+			session.beginTransaction();
+		}
 		System.out.println("save login");
 		session.save(login);
 		session.getTransaction().commit();
@@ -34,7 +36,9 @@ public class LoginDaoImp implements LoginDao {
 	public Login getByKey(String key) {
 		// TODO Auto-generated method stub
 		Session session = sessionFactory.getCurrentSession();
-		session.beginTransaction();
+		if(!session.beginTransaction().isActive()) {
+			session.beginTransaction();
+		}
 		System.out.println("getByKey login");
 		Query query = session.createQuery("From Login l where l.series=:series");
 		query.setParameter("series", key);
@@ -54,7 +58,9 @@ public class LoginDaoImp implements LoginDao {
 	public void update(Login login) {
 		// TODO Auto-generated method stub
 		Session session = sessionFactory.getCurrentSession();
-		session.beginTransaction();
+		if(!session.beginTransaction().isActive()) {
+			session.beginTransaction();
+		}
 		System.out.println("update login");
 		session.update(login);
 		session.getTransaction().commit();
@@ -66,10 +72,14 @@ public class LoginDaoImp implements LoginDao {
 	public void delete(String login) {
 		// TODO Auto-generated method stub
 		Session session = sessionFactory.getCurrentSession();
-		session.beginTransaction();
+		
+		if(!session.beginTransaction().isActive()) {
+			session.beginTransaction();
+		}
+			
 		System.out.println("delete login  " + login);
-		Query query = session.createQuery("From Login l where l.email=:email");
-		query.setParameter("email", login);
+		Query query = session.createQuery("From Login l where l.series=:series");
+		query.setParameter("series", login);
 		
 		if(query.getResultList().size()>0){
 			

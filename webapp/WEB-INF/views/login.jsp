@@ -4,7 +4,7 @@
             <%@ page session="false" %>
 
                 <!DOCTYPE html>
-                <html lang="en">
+                <html lang="en"  auto-config='true'>
 
                 <head>
                     <meta charset="utf-8">
@@ -20,16 +20,7 @@
 					<script type="text/javascript">
 					
 						$(function(){
-							
-								var status = "${STATUS}";
-								
-								if(status!=""){
-									
-									alert("${MESSAGE}");
-									
-									
-								}
-							
+					
 						});
 					
 					
@@ -41,9 +32,7 @@
                		 <div class="container">
                         <div class="row">
                             <div class="col-md-12">
-                               
-                        
-                    <form action="/main/loginAction"  method="post" class="form-inline">
+                    <form action="${pageContext.request.contextPath}/loginAction"  method="post" class="form-inline">
                     
                         <div class="container">
                             <div class="row">
@@ -54,6 +43,19 @@
                                         </div>
                                         <div class="media-body">
                                             <div class="container">
+                                            
+                                              	<c:if test="${true == param.error}">
+                   									
+                   								<div class="row">
+                                                    <div class="alert alert-warning" role="alert">
+													   	帳號或密碼錯誤!
+													</div>
+                                                </div>
+                   									
+                   		
+                   								</c:if>            
+                        
+                                            
                                                 <div class="row">
                                                     <div>
                                                         <div class="form-group">
@@ -82,7 +84,7 @@
                                                         <div>
                                                             <br>
                                                             <button id="SUBMIT" type="submit" class="btn btn-md btn-primary">登入</button>
-                                                            <a href="/main/forget/forgetAccPage" role="button" class="btn btn-md btn-primary">忘記密碼</a>
+                                                            <a href="${pageContext.request.contextPath}/forget/forgetAccPage" role="button" class="btn btn-md btn-primary">忘記密碼</a>
                                                         </div>
                                                     </div>
                                                 </div>

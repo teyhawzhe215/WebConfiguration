@@ -92,14 +92,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		.and().logout().logoutUrl("/logoutAction").logoutSuccessUrl("/");
 		*/
 		
-		http.csrf().disable().authorizeRequests().antMatchers("/","/**","/forget/**").permitAll()
-		.antMatchers("/dog/**").hasRole("USER").and().formLogin().loginPage("/loginPage")
+		http.csrf().disable();
+		
+		http.authorizeRequests().antMatchers("/","/**","/forget/**").permitAll();
+		
+		http.authorizeRequests().antMatchers("/dog/**").hasRole("USER");
+		
+		http.formLogin()
+		.loginPage("/loginPage").failureUrl("/loginPage?error=true")
 		.loginProcessingUrl("/loginAction").usernameParameter("email")
-		.passwordParameter("password").defaultSuccessUrl("/dog/DogPage").failureUrl("/failloginPage").and()
-		.rememberMe().rememberMeParameter("remember-me").tokenRepository(tokenRepository)  
-		.tokenValiditySeconds(86400).and().exceptionHandling().accessDeniedPage("/Access_Denied").and().logout().logoutUrl("/logoutAction").logoutSuccessUrl("/homePage");
+		.passwordParameter("password").defaultSuccessUrl("/dog/DogPage");
 		
+		http.logout().logoutUrl("/logoutAction").logoutSuccessUrl("/homePage");
 		
+		http.rememberMe().rememberMeParameter("remember-me").tokenRepository(tokenRepository)  
+		.tokenValiditySeconds(86400);
+		
+		http.exceptionHandling().accessDeniedPage("/Access_Denied");
 		
 	}
 	

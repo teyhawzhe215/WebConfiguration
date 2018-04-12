@@ -24,9 +24,11 @@ public class ImageController {
 		
 		System.out.println("url="+url);
 		
-		String rootPath = System.getProperty("catalina.home");
+		//String rootPath = System.getProperty("catalina.home");
+		//File dir = new File(rootPath + File.separator + "tmpFiles");
+		String rootPath = System.getProperty("jetty.base");
 		
-		File dir = new File(rootPath + File.separator + "tmpFiles");
+		File dir = new File("images" + File.separator + "tmpFiles");
 		
 		FileInputStream fis = null;  
 	    OutputStream os = null;  
